@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search page</title>
+    <link rel="stylesheet" href="../static/students.css">
+
+</head>
+
+<body>
+    <nav class="navbar">
+        <ul class="nav-links">
+
+            <li><a href="{{ url_for('Dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('search') }}">Seach a student</a></li>
+            
+            
+        </ul>
+    </nav>
+    <div class="container">
+    <form method="GET" action="">
+        <input type="text" name="student_name" placeholder="Enter student name">
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+
+
+{% if results %}
+<h1>Search Results</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Student ID</th>
+        <th>Student Name</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for student in results %}
+        <tr>
+          <td>{{ student.Student_ID }}</td>
+          <td>{{ student.Student_Name }}</td>
+          <td>{{ student.Phone_Number }}</td>
+          <td>{{ student.Email }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% elif student_name %}
+  <p>No results found for your search.</p>
+{% endif %}
+</body>
+
+</html>
